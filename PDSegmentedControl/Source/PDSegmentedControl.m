@@ -8,6 +8,12 @@
 
 #import "PDSegmentedControl.h"
 
+@interface PDSegmentedControlSegment ()
+
+@property (nonatomic, assign) NSInteger index;
+
+@end
+
 @interface PDSegmentedControl () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
     struct {
         unsigned numberOfItemsInSegmentedControl : 1;
@@ -18,12 +24,15 @@
     struct {
         unsigned widthForItemAtIndex : 1;
         unsigned didSelectItemAtIndex : 1;
+        unsigned indicatorForSegmentedControl : 1;
+        unsigned indicatorSizeAtIndex : 1;
     } _delegateHas;
 }
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) NSUInteger selectedIndex;
+@property (nonatomic, strong, nullable) UIView *indicator;
 
 @end
 
@@ -42,7 +51,53 @@
     return self;
 }
 
+- (void)resetIndicator {
+    if (_delegateHas.indicatorForSegmentedControl) {
+        if (self.indicator) {
+            [self.indicator removeFromSuperview];
+            self.indicator = nil;
+        }
+        self.indicator = [self.delegate indicatorForSegmentedControl:self];
+        if (self.indicator) {
+            [self.collectionView addSubview:self.indicator];
+            [self indicatorScrollToIndex:self.selectedIndex animated:NO];
+        }
+    }
+}
+
+- (void)indicatorScrollToIndex:(NSInteger)index animated:(BOOL)animated {
+    NSAssert(_delegateHas.widthForItemAtIndex, @"Protocol method segmentedControl:widthForItemAtIndex: must be implemented");
+
+    if (!self.indicator) return;
+    if (!_delegateHas.indicatorSizeAtIndex) return;
+
+    CGFloat segmentWidth = [self.delegate segmentedControl:self widthForItemAtIndex:index];
+    CGSize indicatorSize = [self.delegate segmentedControl:self indicatorSizeAtIndex:index];
+    
+    CGFloat top = CGRectGetHeight(self.collectionView.frame) - indicatorSize.height;
+    CGFloat left = 0.f;
+    
+    for (NSInteger i = 0; i < index; i ++) {
+        CGFloat width = [self.delegate segmentedControl:self widthForItemAtIndex:index];
+        left += width;
+    }
+    left = left + (segmentWidth - indicatorSize.width) / 2.f;
+    CGRect rect = CGRectMake(left, top, indicatorSize.width, indicatorSize.height);
+
+    void (^perform)(void) = ^{
+        self.indicator.frame = rect;
+    };
+    
+    if (animated) {
+        [UIView animateWithDuration:0.2f animations:perform];
+    } else {
+        perform();
+    }
+}
+
+#pragma mark - Public Methods
 - (void)reloadData {
+    [self resetIndicator];
     [self.collectionView reloadData];
 }
 
@@ -54,6 +109,7 @@
 
 - (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated {
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+    [self indicatorScrollToIndex:index animated:animated];
 }
 
 - (void)registerClass:(Class)segmentClass forSegmentWithReuseIdentifier:(NSString *)identifier {
@@ -85,11 +141,13 @@
 
     if (currentIndexIsSelected && hasSelectedSegment) {
         PDSegmentedControlSegment *segment = [self.dataSource segmentedControl:self segmentForSelectedItemAtIndex:indexPath.row];
+        segment.index = indexPath.row;
         return segment;
     } else {
         NSAssert(_dataSourceHas.segmentForItemAtIndex, @"Protocol method segmentedControl:segmentForItemAtIndex: must be implemented");
         
         PDSegmentedControlSegment *segment = [self.dataSource segmentedControl:self segmentForItemAtIndex:indexPath.row];
+        segment.index = indexPath.row;
         return segment;
     }
 }
@@ -137,11 +195,20 @@
     
     _delegateHas.widthForItemAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:widthForItemAtIndex:)];
     _delegateHas.didSelectItemAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:didSelectItemAtIndex:)];
+    _delegateHas.indicatorForSegmentedControl = [_delegate respondsToSelector:@selector(indicatorForSegmentedControl:)];
+    _delegateHas.indicatorSizeAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:indicatorSizeAtIndex:)];
+    
+    [self resetIndicator];
 }
 
 - (void)setAlwaysBounceHorizontal:(BOOL)alwaysBounceHorizontal {
     _alwaysBounceHorizontal = alwaysBounceHorizontal;
     self.collectionView.alwaysBounceHorizontal = alwaysBounceHorizontal;
+}
+
+- (void)setBounces:(BOOL)bounces {
+    _bounces = bounces;
+    self.collectionView.bounces = _bounces;
 }
 
 #pragma mark - Getter Methods

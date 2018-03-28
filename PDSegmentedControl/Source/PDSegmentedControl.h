@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)segmentedControl:(PDSegmentedControl *)segmentedControl didSelectItemAtIndex:(NSInteger)index;
+// For indicator.
+- (nullable UIView *)indicatorForSegmentedControl:(PDSegmentedControl *)segmentedControl;
+- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl indicatorSizeAtIndex:(NSInteger)index;
 
 @end
 
@@ -38,7 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<PDSegmentedControlDelegate> delegate;
 
 @property (nonatomic, assign, readonly) NSUInteger selectedIndex;
-@property (nonatomic, assign) BOOL alwaysBounceHorizontal; // Default NO, if YES and bounces is YES, even if content is smaller than bounds, allow drag horizontally.
+@property (nonatomic, assign) BOOL alwaysBounceHorizontal; // Default is NO.
+@property (nonatomic, assign) BOOL bounces; // Default is YES.
 
 - (void)reloadData;
 

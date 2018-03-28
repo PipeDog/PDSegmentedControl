@@ -26,9 +26,7 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self.segmentedControl registerClass:[PDSegmentedControlSegment class] forSegmentWithReuseIdentifier:kDefaultSegmentId];
-    [self.segmentedControl registerClass:[PDSegmentedControlSegment class] forSegmentWithReuseIdentifier:kSelectedSegmentId];
-    
-    [self.segmentedControl setSelectedIndex:2 animated:NO];
+    [self.segmentedControl registerClass:[PDSegmentedControlSegment class] forSegmentWithReuseIdentifier:kSelectedSegmentId];    
 }
 
 #pragma mark - PDSegmentedControlDataSource Methods
@@ -61,6 +59,18 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
 
 - (void)segmentedControl:(PDSegmentedControl *)segmentedControl didSelectItemAtIndex:(NSInteger)index {
     self.textLabel.text = self.items[index];
+}
+
+- (UIView *)indicatorForSegmentedControl:(PDSegmentedControl *)segmentedControl {
+    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 5.f)];
+    indicator.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3f];
+    indicator.layer.cornerRadius = 2.5f;
+    indicator.layer.maskedCorners = YES;
+    return indicator;
+}
+
+- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl indicatorSizeAtIndex:(NSInteger)index {
+    return CGSizeMake(10 * index + 20, 5);
 }
 
 #pragma mark - Getter Methods
