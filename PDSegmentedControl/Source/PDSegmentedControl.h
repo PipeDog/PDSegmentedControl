@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (__kindof PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForItemAtIndex:(NSInteger)index;
 
 @optional
-- (__kindof PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl selectedSegmentForItemAtIndex:(NSInteger)index;
+- (__kindof PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForSelectedItemAtIndex:(NSInteger)index;
 
 @end
 

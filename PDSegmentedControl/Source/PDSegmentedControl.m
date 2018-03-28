@@ -84,7 +84,7 @@
     BOOL hasSelectedSegment = _dataSourceHas.selectedSegmentForItemAtIndex;
 
     if (currentIndexIsSelected && hasSelectedSegment) {
-        PDSegmentedControlSegment *segment = [self.dataSource segmentedControl:self selectedSegmentForItemAtIndex:indexPath.row];
+        PDSegmentedControlSegment *segment = [self.dataSource segmentedControl:self segmentForSelectedItemAtIndex:indexPath.row];
         return segment;
     } else {
         NSAssert(_dataSourceHas.segmentForItemAtIndex, @"Protocol method segmentedControl:segmentForItemAtIndex: must be implemented");
@@ -129,7 +129,7 @@
 
     _dataSourceHas.numberOfItemsInSegmentedControl = [_dataSource respondsToSelector:@selector(numberOfItemsInSegmentedControl:)];
     _dataSourceHas.segmentForItemAtIndex = [_dataSource respondsToSelector:@selector(segmentedControl:segmentForItemAtIndex:)];
-    _dataSourceHas.selectedSegmentForItemAtIndex = [_dataSource respondsToSelector:@selector(segmentedControl:selectedSegmentForItemAtIndex:)];
+    _dataSourceHas.selectedSegmentForItemAtIndex = [_dataSource respondsToSelector:@selector(segmentedControl:segmentForSelectedItemAtIndex:)];
 }
 
 - (void)setDelegate:(id<PDSegmentedControlDelegate>)delegate {

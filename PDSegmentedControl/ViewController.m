@@ -45,7 +45,7 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
     return segment;
 }
 
-- (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl selectedSegmentForItemAtIndex:(NSInteger)index {
+- (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForSelectedItemAtIndex:(NSInteger)index {
     PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentWithReuseIdentifier:kSelectedSegmentId forIndex:index];
     segment.textLabel.frame = CGRectMake(0, 0, CGRectGetWidth(segment.frame), CGRectGetHeight(segment.frame));
     segment.textLabel.font = [UIFont boldSystemFontOfSize:20];
