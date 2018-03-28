@@ -69,7 +69,11 @@
     NSAssert(_delegateHas.widthForItemAtIndex, @"Protocol method segmentedControl:widthForItemAtIndex: must be implemented");
 
     if (!self.indicator) return;
-    if (!_delegateHas.indicatorSizeAtIndex) return;
+    if (!_delegateHas.indicatorSizeAtIndex) {
+        [self.indicator removeFromSuperview];
+        self.indicator = nil;
+        return;
+    }
 
     CGFloat segmentWidth = [self.delegate segmentedControl:self widthForItemAtIndex:index];
     CGSize indicatorSize = [self.delegate segmentedControl:self indicatorSizeAtIndex:index];
