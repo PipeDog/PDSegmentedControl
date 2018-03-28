@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol PDSegmentedControlDelegate <NSObject>
+@protocol PDSegmentedControlDelegate <UIScrollViewDelegate>
 
 - (CGFloat)segmentedControl:(PDSegmentedControl *)segmentedControl widthForItemAtIndex:(NSInteger)index;
 

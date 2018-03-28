@@ -26,6 +26,15 @@
         unsigned didSelectItemAtIndex : 1;
         unsigned indicatorForSegmentedControl : 1;
         unsigned indicatorSizeAtIndex : 1;
+        
+        // UIScrollViewDelegate.
+        unsigned scrollViewDidScroll : 1;
+        unsigned scrollViewWillBeginDragging : 1;
+        unsigned scrollViewWillEndDragging : 1;
+        unsigned scrollViewDidEndDragging : 1;
+        unsigned scrollViewWillBeginDecelerating : 1;
+        unsigned scrollViewDidEndDecelerating : 1;
+        unsigned scrollViewDidEndScrollingAnimation : 1;
     } _delegateHas;
 }
 
@@ -175,6 +184,49 @@
     return CGSizeMake(width, height);
 }
 
+#pragma mark - UIScrollViewDelegate Methods
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (_delegateHas.scrollViewDidScroll) {
+        [self.delegate scrollViewDidScroll:scrollView];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (_delegateHas.scrollViewWillBeginDragging) {
+        [self.delegate scrollViewWillBeginDragging:scrollView];
+    }
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    if (_delegateHas.scrollViewWillEndDragging) {
+        [self.delegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (_delegateHas.scrollViewDidEndDragging) {
+        [self.delegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    if (_delegateHas.scrollViewWillBeginDecelerating) {
+        [self.delegate scrollViewWillBeginDecelerating:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (_delegateHas.scrollViewDidEndDecelerating) {
+        [self.delegate scrollViewDidEndDecelerating:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (_delegateHas.scrollViewDidEndScrollingAnimation) {
+        [self.delegate scrollViewDidEndScrollingAnimation:scrollView];
+    }
+}
+
 #pragma mark - Setter Methods
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
@@ -202,6 +254,15 @@
     _delegateHas.indicatorForSegmentedControl = [_delegate respondsToSelector:@selector(indicatorForSegmentedControl:)];
     _delegateHas.indicatorSizeAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:indicatorSizeAtIndex:)];
     
+    // UIScrollViewDelegate.
+    _delegateHas.scrollViewDidScroll = [_delegate respondsToSelector:@selector(scrollViewDidScroll:)];
+    _delegateHas.scrollViewWillBeginDragging = [_delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)];
+    _delegateHas.scrollViewWillEndDragging = [_delegate respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)];
+    _delegateHas.scrollViewDidEndDragging = [_delegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)];
+    _delegateHas.scrollViewWillBeginDecelerating = [_delegate respondsToSelector:@selector(scrollViewWillBeginDecelerating:)];
+    _delegateHas.scrollViewDidEndDecelerating = [_delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)];
+    _delegateHas.scrollViewDidEndScrollingAnimation = [_delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)];
+
     [self resetIndicator];
 }
 
