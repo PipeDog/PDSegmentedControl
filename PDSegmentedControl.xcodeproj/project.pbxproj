@@ -15,6 +15,7 @@
 		EC770239206A718700B1A3B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EC770238206A718700B1A3B4 /* main.m */; };
 		EC770243206A718700B1A3B4 /* PDSegmentedControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC770242206A718700B1A3B4 /* PDSegmentedControlTests.m */; };
 		EC77024E206A718700B1A3B4 /* PDSegmentedControlUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC77024D206A718700B1A3B4 /* PDSegmentedControlUITests.m */; };
+		EC77025E206A724300B1A3B4 /* PDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EC77025D206A724300B1A3B4 /* PDSegmentedControl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		EC770249206A718700B1A3B4 /* PDSegmentedControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PDSegmentedControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC77024D206A718700B1A3B4 /* PDSegmentedControlUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDSegmentedControlUITests.m; sourceTree = "<group>"; };
 		EC77024F206A718700B1A3B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC77025C206A724300B1A3B4 /* PDSegmentedControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDSegmentedControl.h; sourceTree = "<group>"; };
+		EC77025D206A724300B1A3B4 /* PDSegmentedControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDSegmentedControl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,7 @@
 		EC770228206A718700B1A3B4 /* PDSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
+				EC77025B206A720600B1A3B4 /* Source */,
 				EC770229206A718700B1A3B4 /* AppDelegate.h */,
 				EC77022A206A718700B1A3B4 /* AppDelegate.m */,
 				EC77022C206A718700B1A3B4 /* ViewController.h */,
@@ -130,6 +134,15 @@
 				EC77024F206A718700B1A3B4 /* Info.plist */,
 			);
 			path = PDSegmentedControlUITests;
+			sourceTree = "<group>";
+		};
+		EC77025B206A720600B1A3B4 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				EC77025C206A724300B1A3B4 /* PDSegmentedControl.h */,
+				EC77025D206A724300B1A3B4 /* PDSegmentedControl.m */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC77025E206A724300B1A3B4 /* PDSegmentedControl.m in Sources */,
 				EC77022E206A718700B1A3B4 /* ViewController.m in Sources */,
 				EC770239206A718700B1A3B4 /* main.m in Sources */,
 				EC77022B206A718700B1A3B4 /* AppDelegate.m in Sources */,
