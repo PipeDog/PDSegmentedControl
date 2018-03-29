@@ -311,6 +311,7 @@
 - (UILabel *)textLabel {
     if (!_textLabel) {
         _textLabel = [[UILabel alloc] init];
+        _textLabel.frame = self.bounds;
         _textLabel.numberOfLines = 1;
         _textLabel.font = [UIFont systemFontOfSize:12.f];
         _textLabel.textColor = [UIColor darkTextColor];

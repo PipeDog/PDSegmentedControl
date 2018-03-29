@@ -36,7 +36,6 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
 
 - (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForItemAtIndex:(NSInteger)index {
     PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentWithReuseIdentifier:kDefaultSegmentId forIndex:index];
-    segment.textLabel.frame = CGRectMake(0, 0, CGRectGetWidth(segment.frame), CGRectGetHeight(segment.frame));
     segment.textLabel.font = [UIFont boldSystemFontOfSize:14];
     segment.textLabel.textColor = [UIColor darkTextColor];
     segment.textLabel.text = self.items[index];
@@ -45,7 +44,6 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
 
 - (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForSelectedItemAtIndex:(NSInteger)index {
     PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentWithReuseIdentifier:kSelectedSegmentId forIndex:index];
-    segment.textLabel.frame = CGRectMake(0, 0, CGRectGetWidth(segment.frame), CGRectGetHeight(segment.frame));
     segment.textLabel.font = [UIFont boldSystemFontOfSize:20];
     segment.textLabel.textColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     segment.textLabel.text = self.items[index];
