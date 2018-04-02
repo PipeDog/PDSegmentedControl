@@ -59,16 +59,16 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
     self.textLabel.text = self.items[index];
 }
 
-- (UIView *)indicatorForSegmentedControl:(PDSegmentedControl *)segmentedControl {
-    UIView *indicator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 5.f)];
-    indicator.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3f];
-    indicator.layer.cornerRadius = 2.5f;
-    indicator.layer.maskedCorners = YES;
-    return indicator;
+- (UIView *)flagForSegmentedControl:(PDSegmentedControl *)segmentedControl {
+    UIView *flag = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 5.f)];
+    flag.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3f];
+    flag.layer.cornerRadius = 2.5f;
+    flag.layer.maskedCorners = YES;
+    return flag;
 }
 
-- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl indicatorSizeAtIndex:(NSInteger)index {
-    return CGSizeMake(10 * index + 20, 5);
+- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl flagSizeAtIndex:(NSInteger)index {
+    return CGSizeMake(10 * index + 20, 5 + index);
 }
 
 #pragma mark - Getter Methods

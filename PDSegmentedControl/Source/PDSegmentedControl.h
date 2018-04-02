@@ -29,9 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)segmentedControl:(PDSegmentedControl *)segmentedControl didSelectItemAtIndex:(NSInteger)index;
-// For indicator.
-- (nullable UIView *)indicatorForSegmentedControl:(PDSegmentedControl *)segmentedControl;
-- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl indicatorSizeAtIndex:(NSInteger)index;
+
+- (nullable UIView *)flagForSegmentedControl:(PDSegmentedControl *)segmentedControl;
+- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl flagSizeAtIndex:(NSInteger)index;
 
 @end
 
@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<PDSegmentedControlDelegate> delegate;
 
 @property (nonatomic, assign, readonly) NSUInteger selectedIndex;
+@property (nonatomic, strong, readonly) UIScrollView *scrollView;
+
 @property (nonatomic, assign) BOOL alwaysBounceHorizontal; // Default is NO.
 @property (nonatomic, assign) BOOL bounces; // Default is YES.
 

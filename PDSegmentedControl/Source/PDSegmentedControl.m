@@ -24,8 +24,8 @@
     struct {
         unsigned widthForItemAtIndex : 1;
         unsigned didSelectItemAtIndex : 1;
-        unsigned indicatorForSegmentedControl : 1;
-        unsigned indicatorSizeAtIndex : 1;
+        unsigned flagForSegmentedControl : 1;
+        unsigned flagSizeAtIndex : 1;
         
         // UIScrollViewDelegate.
         unsigned scrollViewDidScroll : 1;
@@ -41,7 +41,7 @@
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) NSUInteger selectedIndex;
-@property (nonatomic, strong, nullable) UIView *indicator;
+@property (nonatomic, strong, nullable) UIView *flag;
 
 @end
 
@@ -60,45 +60,45 @@
     return self;
 }
 
-- (void)resetIndicator {
-    if (_delegateHas.indicatorForSegmentedControl) {
-        if (self.indicator) {
-            [self.indicator removeFromSuperview];
-            self.indicator = nil;
+- (void)reloadFlag {
+    if (_delegateHas.flagForSegmentedControl) {
+        if (self.flag) {
+            [self.flag removeFromSuperview];
+            self.flag = nil;
         }
-        self.indicator = [self.delegate indicatorForSegmentedControl:self];
-        if (self.indicator) {
-            [self.collectionView addSubview:self.indicator];
-            [self indicatorScrollToIndex:self.selectedIndex animated:NO];
+        self.flag = [self.delegate flagForSegmentedControl:self];
+        if (self.flag) {
+            [self.collectionView addSubview:self.flag];
+            [self flagScrollToIndex:self.selectedIndex animated:NO];
         }
     }
 }
 
-- (void)indicatorScrollToIndex:(NSInteger)index animated:(BOOL)animated {
+- (void)flagScrollToIndex:(NSInteger)index animated:(BOOL)animated {
     NSAssert(_delegateHas.widthForItemAtIndex, @"Protocol method segmentedControl:widthForItemAtIndex: must be implemented");
 
-    if (!self.indicator) return;
-    if (!_delegateHas.indicatorSizeAtIndex) {
-        [self.indicator removeFromSuperview];
-        self.indicator = nil;
+    if (!self.flag) return;
+    if (!_delegateHas.flagSizeAtIndex) {
+        [self.flag removeFromSuperview];
+        self.flag = nil;
         return;
     }
 
     CGFloat segmentWidth = [self.delegate segmentedControl:self widthForItemAtIndex:index];
-    CGSize indicatorSize = [self.delegate segmentedControl:self indicatorSizeAtIndex:index];
+    CGSize flagSize = [self.delegate segmentedControl:self flagSizeAtIndex:index];
     
-    CGFloat top = CGRectGetHeight(self.collectionView.frame) - indicatorSize.height;
+    CGFloat top = CGRectGetHeight(self.collectionView.frame) - flagSize.height;
     CGFloat left = 0.f;
     
     for (NSInteger i = 0; i < index; i ++) {
         CGFloat width = [self.delegate segmentedControl:self widthForItemAtIndex:index];
         left += width;
     }
-    left = left + (segmentWidth - indicatorSize.width) / 2.f;
-    CGRect rect = CGRectMake(left, top, indicatorSize.width, indicatorSize.height);
+    left = left + (segmentWidth - flagSize.width) / 2.f;
+    CGRect rect = CGRectMake(left, top, flagSize.width, flagSize.height);
 
     void (^perform)(void) = ^{
-        self.indicator.frame = rect;
+        self.flag.frame = rect;
     };
     
     if (animated) {
@@ -110,7 +110,7 @@
 
 #pragma mark - Public Methods
 - (void)reloadData {
-    [self resetIndicator];
+    [self reloadFlag];
     [self.collectionView reloadData];
 }
 
@@ -122,7 +122,7 @@
 
 - (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated {
     [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
-    [self indicatorScrollToIndex:index animated:animated];
+    [self flagScrollToIndex:index animated:animated];
 }
 
 - (void)registerClass:(Class)segmentClass forSegmentWithReuseIdentifier:(NSString *)identifier {
@@ -251,8 +251,8 @@
     
     _delegateHas.widthForItemAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:widthForItemAtIndex:)];
     _delegateHas.didSelectItemAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:didSelectItemAtIndex:)];
-    _delegateHas.indicatorForSegmentedControl = [_delegate respondsToSelector:@selector(indicatorForSegmentedControl:)];
-    _delegateHas.indicatorSizeAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:indicatorSizeAtIndex:)];
+    _delegateHas.flagForSegmentedControl = [_delegate respondsToSelector:@selector(flagForSegmentedControl:)];
+    _delegateHas.flagSizeAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:flagSizeAtIndex:)];
     
     // UIScrollViewDelegate.
     _delegateHas.scrollViewDidScroll = [_delegate respondsToSelector:@selector(scrollViewDidScroll:)];
@@ -263,7 +263,11 @@
     _delegateHas.scrollViewDidEndDecelerating = [_delegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)];
     _delegateHas.scrollViewDidEndScrollingAnimation = [_delegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)];
 
-    [self resetIndicator];
+    [self reloadFlag];
+}
+
+- (UIScrollView *)scrollView {
+    return self.collectionView;
 }
 
 - (void)setAlwaysBounceHorizontal:(BOOL)alwaysBounceHorizontal {
