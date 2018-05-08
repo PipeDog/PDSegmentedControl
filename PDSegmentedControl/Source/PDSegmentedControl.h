@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)segmentedControl:(PDSegmentedControl *)segmentedControl didSelectItemAtIndex:(NSInteger)index;
 
 - (nullable UIView *)flagForSegmentedControl:(PDSegmentedControl *)segmentedControl;
-- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl flagSizeAtIndex:(NSInteger)index;
+- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl sizeForFlagAtIndex:(NSInteger)index;
 
 @end
 

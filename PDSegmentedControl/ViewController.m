@@ -56,14 +56,14 @@
 }
 
 - (UIView *)flagForSegmentedControl:(PDSegmentedControl *)segmentedControl {
-    UIView *flag = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 5.f)];
+    UIView *flag = [[UIView alloc] init];
     flag.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3f];
     flag.layer.cornerRadius = 2.5f;
     flag.layer.maskedCorners = YES;
     return flag;
 }
 
-- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl flagSizeAtIndex:(NSInteger)index {
+- (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl sizeForFlagAtIndex:(NSInteger)index {
     return CGSizeMake(10 * index + 20, 5 + index);
 }
 

@@ -25,7 +25,7 @@
         unsigned widthForItemAtIndex : 1;
         unsigned didSelectItemAtIndex : 1;
         unsigned flagForSegmentedControl : 1;
-        unsigned flagSizeAtIndex : 1;
+        unsigned sizeForFlagAtIndex : 1;
         
         // UIScrollViewDelegate.
         unsigned scrollViewDidScroll : 1;
@@ -79,14 +79,14 @@
     NSAssert(_delegateHas.widthForItemAtIndex, @"Protocol method segmentedControl:widthForItemAtIndex: must be implemented");
 
     if (!self.flag) return;
-    if (!_delegateHas.flagSizeAtIndex) {
+    if (!_delegateHas.sizeForFlagAtIndex) {
         [self.flag removeFromSuperview];
         self.flag = nil;
         return;
     }
 
     CGFloat segmentWidth = [self.delegate segmentedControl:self widthForItemAtIndex:index];
-    CGSize flagSize = [self.delegate segmentedControl:self flagSizeAtIndex:index];
+    CGSize flagSize = [self.delegate segmentedControl:self sizeForFlagAtIndex:index];
     
     CGFloat top = CGRectGetHeight(self.collectionView.frame) - flagSize.height;
     CGFloat left = 0.f;
@@ -256,7 +256,7 @@
     _delegateHas.widthForItemAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:widthForItemAtIndex:)];
     _delegateHas.didSelectItemAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:didSelectItemAtIndex:)];
     _delegateHas.flagForSegmentedControl = [_delegate respondsToSelector:@selector(flagForSegmentedControl:)];
-    _delegateHas.flagSizeAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:flagSizeAtIndex:)];
+    _delegateHas.sizeForFlagAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:sizeForFlagAtIndex:)];
     
     // UIScrollViewDelegate.
     _delegateHas.scrollViewDidScroll = [_delegate respondsToSelector:@selector(scrollViewDidScroll:)];
