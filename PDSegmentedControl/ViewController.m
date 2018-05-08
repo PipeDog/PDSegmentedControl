@@ -9,9 +9,6 @@
 #import "ViewController.h"
 #import "PDSegmentedControl.h"
 
-static NSString *const kDefaultSegmentId = @"kDefaultSegmentId";
-static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
-
 @interface ViewController () <PDSegmentedControlDelegate, PDSegmentedControlDataSource>
 
 @property (nonatomic, strong) PDSegmentedControl *segmentedControl;
@@ -25,8 +22,7 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self.segmentedControl registerClass:[PDSegmentedControlSegment class] forSegmentWithReuseIdentifier:kDefaultSegmentId];
-    [self.segmentedControl registerClass:[PDSegmentedControlSegment class] forSegmentWithReuseIdentifier:kSelectedSegmentId];    
+    [self.view addSubview:self.segmentedControl];
 }
 
 #pragma mark - PDSegmentedControlDataSource Methods
@@ -35,7 +31,7 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
 }
 
 - (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForItemAtIndex:(NSInteger)index {
-    PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentWithReuseIdentifier:kDefaultSegmentId forIndex:index];
+    PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentOfClass:[PDSegmentedControlSegment class] forIndex:index];
     segment.textLabel.font = [UIFont boldSystemFontOfSize:14];
     segment.textLabel.textColor = [UIColor darkTextColor];
     segment.textLabel.text = self.items[index];
@@ -43,7 +39,7 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
 }
 
 - (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForSelectedItemAtIndex:(NSInteger)index {
-    PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentWithReuseIdentifier:kSelectedSegmentId forIndex:index];
+    PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentOfClass:[PDSegmentedControlSegment class] forIndex:index];
     segment.textLabel.font = [UIFont boldSystemFontOfSize:20];
     segment.textLabel.textColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     segment.textLabel.text = self.items[index];
@@ -82,7 +78,6 @@ static NSString *const kSelectedSegmentId = @"kSelectedSegmentId";
         _segmentedControl.dataSource = self;
         _segmentedControl.delegate = self;
         _segmentedControl.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1f];
-        [self.view addSubview:_segmentedControl];
     }
     return _segmentedControl;
 }

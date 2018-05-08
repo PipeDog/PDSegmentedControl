@@ -42,6 +42,7 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, strong, nullable) UIView *flag;
+@property (nonatomic, strong) NSMutableSet<Class> *registeredSegmentClasses;
 
 @end
 
@@ -125,16 +126,19 @@
     [self flagScrollToIndex:index animated:animated];
 }
 
-- (void)registerClass:(Class)segmentClass forSegmentWithReuseIdentifier:(NSString *)identifier {
-    [self.collectionView registerClass:segmentClass forCellWithReuseIdentifier:identifier];
-}
-
-- (void)registerNib:(UINib *)nib forSegmentWithReuseIdentifier:(NSString *)identifier {
-    [self.collectionView registerNib:nib forCellWithReuseIdentifier:identifier];
-}
-
-- (UICollectionViewCell *)dequeueReusableSegmentWithReuseIdentifier:(NSString *)identifier forIndex:(NSInteger)index {
-    return [self.collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+- (PDSegmentedControlSegment *)dequeueReusableSegmentOfClass:(Class)aClass forIndex:(NSInteger)index {
+    if (!aClass || index < 0) {
+        NSAssert(NO, @"Invalid parameter");
+        return nil;
+    }
+    
+    NSString *segmentId = NSStringFromClass(aClass);
+    
+    if (![self.registeredSegmentClasses containsObject:aClass]) {
+        [self.registeredSegmentClasses addObject:aClass];
+        [self.collectionView registerClass:aClass forCellWithReuseIdentifier:segmentId];
+    }
+    return [self.collectionView dequeueReusableCellWithReuseIdentifier:segmentId forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
 - (PDSegmentedControlSegment *)segmentForItemAtIndex:(NSInteger)index {
@@ -306,6 +310,13 @@
         }
     }
     return _collectionView;
+}
+
+- (NSMutableSet<Class> *)registeredSegmentClasses {
+    if (!_registeredSegmentClasses) {
+        _registeredSegmentClasses = [NSMutableSet set];
+    }
+    return _registeredSegmentClasses;
 }
 
 @end

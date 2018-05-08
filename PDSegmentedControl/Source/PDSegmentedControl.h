@@ -54,10 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable PDSegmentedControlSegment *)segmentForItemAtIndex:(NSInteger)index;
 
-- (void)registerClass:(nullable Class)segmentClass forSegmentWithReuseIdentifier:(NSString *)identifier;
-- (void)registerNib:(nullable UINib *)nib forSegmentWithReuseIdentifier:(NSString *)identifier;
-
-- (__kindof PDSegmentedControlSegment *)dequeueReusableSegmentWithReuseIdentifier:(NSString *)identifier forIndex:(NSInteger)index;
+- (__kindof PDSegmentedControlSegment *)dequeueReusableSegmentOfClass:(Class)aClass forIndex:(NSInteger)index;
 
 @end
 
