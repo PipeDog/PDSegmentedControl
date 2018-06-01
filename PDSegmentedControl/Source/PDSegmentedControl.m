@@ -141,10 +141,6 @@
     return [self.collectionView dequeueReusableCellWithReuseIdentifier:segmentId forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
-- (PDSegmentedControlSegment *)segmentForItemAtIndex:(NSInteger)index {
-    return (PDSegmentedControlSegment *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-}
-
 #pragma mark - UICollectionView Delegate && DataSource Methods
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSAssert(_dataSourceHas.numberOfItemsInSegmentedControl, @"Protocol method numberOfItemsInSegmentedControl: must be implemented");

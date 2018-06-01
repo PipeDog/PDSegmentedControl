@@ -52,8 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 
-- (nullable PDSegmentedControlSegment *)segmentForItemAtIndex:(NSInteger)index;
-
 - (__kindof PDSegmentedControlSegment *)dequeueReusableSegmentOfClass:(Class)aClass forIndex:(NSInteger)index;
 
 @end
