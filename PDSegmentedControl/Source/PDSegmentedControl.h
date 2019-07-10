@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable UIView *)flagForSegmentedControl:(PDSegmentedControl *)segmentedControl;
 - (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl sizeForFlagAtIndex:(NSInteger)index;
+- (CGPoint)segmentedControl:(PDSegmentedControl *)segmentedControl offsetForFlagAtIndex:(NSInteger)index;
+- (CGFloat)minimumLineSpacingForSegmentedControl:(PDSegmentedControl *)segmentedControl;
 
 @end
 
