@@ -243,6 +243,12 @@
     }
 }
 
+#pragma mark - Override Methods
+- (void)didMoveToSuperview {
+    [super didMoveToSuperview];
+    [self reloadData];
+}
+
 #pragma mark - Setter Methods
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
