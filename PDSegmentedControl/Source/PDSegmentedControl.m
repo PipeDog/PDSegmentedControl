@@ -26,6 +26,8 @@
         unsigned didSelectItemAtIndex : 1;
         unsigned flagForSegmentedControl : 1;
         unsigned sizeForFlagAtIndex : 1;
+        unsigned offsetForFlagAtIndex : 1;
+        unsigned minimumLineSpacingForSegmentedControl : 1;
         
         // UIScrollViewDelegate.
         unsigned scrollViewDidScroll : 1;
@@ -77,18 +79,18 @@
 
 - (void)flagScrollToIndex:(NSInteger)index animated:(BOOL)animated {
     NSAssert(_delegateHas.widthForItemAtIndex, @"Protocol method segmentedControl:widthForItemAtIndex: must be implemented");
-
+    
     if (!self.flag) return;
     if (!_delegateHas.sizeForFlagAtIndex) {
         [self.flag removeFromSuperview];
         self.flag = nil;
         return;
     }
-
+    
     CGFloat segmentWidth = [self.delegate segmentedControl:self widthForItemAtIndex:index];
     CGSize flagSize = [self.delegate segmentedControl:self sizeForFlagAtIndex:index];
     
-    CGFloat top = CGRectGetHeight(self.collectionView.frame) - flagSize.height;
+    CGFloat top = 0.f;
     CGFloat left = 0.f;
     
     for (NSInteger i = 0; i < index; i ++) {
@@ -96,6 +98,13 @@
         left += width;
     }
     left = left + (segmentWidth - flagSize.width) / 2.f;
+    
+    if (_delegateHas.offsetForFlagAtIndex) {
+        CGPoint offset = [self.delegate segmentedControl:self offsetForFlagAtIndex:index];
+        left += offset.x;
+        top += offset.y;
+    }
+
     CGRect rect = CGRectMake(left, top, flagSize.width, flagSize.height);
 
     void (^perform)(void) = ^{
@@ -184,6 +193,13 @@
     return CGSizeMake(width, height);
 }
 
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    if (_delegateHas.minimumLineSpacingForSegmentedControl) {
+        return [self.delegate minimumLineSpacingForSegmentedControl:self];
+    }
+    return 0.f;
+}
+
 #pragma mark - UIScrollViewDelegate Methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (_delegateHas.scrollViewDidScroll) {
@@ -253,7 +269,9 @@
     _delegateHas.didSelectItemAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:didSelectItemAtIndex:)];
     _delegateHas.flagForSegmentedControl = [_delegate respondsToSelector:@selector(flagForSegmentedControl:)];
     _delegateHas.sizeForFlagAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:sizeForFlagAtIndex:)];
-    
+    _delegateHas.offsetForFlagAtIndex = [_delegate respondsToSelector:@selector(segmentedControl:offsetForFlagAtIndex:)];
+    _delegateHas.minimumLineSpacingForSegmentedControl = [_delegate respondsToSelector:@selector(minimumLineSpacingForSegmentedControl:)];
+
     // UIScrollViewDelegate.
     _delegateHas.scrollViewDidScroll = [_delegate respondsToSelector:@selector(scrollViewDidScroll:)];
     _delegateHas.scrollViewWillBeginDragging = [_delegate respondsToSelector:@selector(scrollViewWillBeginDragging:)];
