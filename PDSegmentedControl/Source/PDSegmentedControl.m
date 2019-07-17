@@ -69,6 +69,9 @@
             [self.flag removeFromSuperview];
             self.flag = nil;
         }
+        if (![self.dataSource numberOfItemsInSegmentedControl:self]) {
+            return;
+        }
         self.flag = [self.delegate flagForSegmentedControl:self];
         if (self.flag) {
             [self.collectionView addSubview:self.flag];
