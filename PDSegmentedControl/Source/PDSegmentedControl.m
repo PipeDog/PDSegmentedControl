@@ -64,11 +64,11 @@
 }
 
 - (void)reloadFlag {
+    if (self.flag) {
+        [self.flag removeFromSuperview];
+        self.flag = nil;
+    }
     if (_delegateHas.flagForSegmentedControl) {
-        if (self.flag) {
-            [self.flag removeFromSuperview];
-            self.flag = nil;
-        }
         if (![self.dataSource numberOfItemsInSegmentedControl:self]) {
             return;
         }
