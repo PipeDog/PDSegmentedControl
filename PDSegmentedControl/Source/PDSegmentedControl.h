@@ -28,12 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGFloat)segmentedControl:(PDSegmentedControl *)segmentedControl widthForItemAtIndex:(NSInteger)index;
 
 @optional
+- (CGFloat)segmentedControl:(PDSegmentedControl *)segmentedControl widthForSelectedItemAtIndex:(NSInteger)index;
 - (void)segmentedControl:(PDSegmentedControl *)segmentedControl didSelectItemAtIndex:(NSInteger)index;
 
 - (nullable UIView *)flagForSegmentedControl:(PDSegmentedControl *)segmentedControl;
 - (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl sizeForFlagAtIndex:(NSInteger)index;
 - (CGPoint)segmentedControl:(PDSegmentedControl *)segmentedControl offsetForFlagAtIndex:(NSInteger)index;
-- (CGFloat)minimumLineSpacingForSegmentedControl:(PDSegmentedControl *)segmentedControl;
+- (CGFloat)minimumInteritemSpacingForSegmentedControl:(PDSegmentedControl *)segmentedControl;
 
 @end
 
@@ -51,8 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reloadData;
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
-
-- (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 - (__kindof PDSegmentedControlSegment *)dequeueReusableSegmentOfClass:(Class)aClass forIndex:(NSInteger)index;
 

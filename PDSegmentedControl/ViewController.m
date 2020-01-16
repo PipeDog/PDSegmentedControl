@@ -32,6 +32,7 @@
 
 - (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForItemAtIndex:(NSInteger)index {
     PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentOfClass:[PDSegmentedControlSegment class] forIndex:index];
+    segment.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f * (index + 1)];
     segment.textLabel.font = [UIFont boldSystemFontOfSize:14];
     segment.textLabel.textColor = [UIColor darkTextColor];
     segment.textLabel.text = self.items[index];
@@ -40,6 +41,7 @@
 
 - (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForSelectedItemAtIndex:(NSInteger)index {
     PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentOfClass:[PDSegmentedControlSegment class] forIndex:index];
+    segment.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f * (index + 1)];
     segment.textLabel.font = [UIFont boldSystemFontOfSize:20];
     segment.textLabel.textColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
     segment.textLabel.text = self.items[index];
@@ -48,7 +50,13 @@
 
 #pragma mark - PDSegmentedControlDelegate Methods
 - (CGFloat)segmentedControl:(PDSegmentedControl *)segmentedControl widthForItemAtIndex:(NSInteger)index {
-    return 100.f;
+    // 70, 80, 90, 100, 110, 120
+    // 70, 150, 240, 340, 450, 570
+    return 10.f * index + 70.f;
+}
+
+- (CGFloat)segmentedControl:(PDSegmentedControl *)segmentedControl widthForSelectedItemAtIndex:(NSInteger)index {
+    return 30.f * index + 100.f;
 }
 
 - (void)segmentedControl:(PDSegmentedControl *)segmentedControl didSelectItemAtIndex:(NSInteger)index {
@@ -67,7 +75,7 @@
     return CGSizeMake(10 * index + 20, 5 + index);
 }
 
-- (CGFloat)minimumLineSpacingForSegmentedControl:(PDSegmentedControl *)segmentedControl {
+- (CGFloat)minimumInteritemSpacingForSegmentedControl:(PDSegmentedControl *)segmentedControl {
     return 30.f;
 }
 
