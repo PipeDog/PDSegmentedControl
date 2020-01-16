@@ -67,6 +67,10 @@
     return CGSizeMake(10 * index + 20, 5 + index);
 }
 
+- (CGFloat)minimumLineSpacingForSegmentedControl:(PDSegmentedControl *)segmentedControl {
+    return 30.f;
+}
+
 #pragma mark - Getter Methods
 - (PDSegmentedControl *)segmentedControl {
     if (!_segmentedControl) {

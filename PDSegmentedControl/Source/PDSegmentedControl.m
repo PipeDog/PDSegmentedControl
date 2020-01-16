@@ -90,12 +90,17 @@
         return;
     }
     
+    CGFloat minimumLineSpacing = 0.f;
+    if (_delegateHas.minimumLineSpacingForSegmentedControl) {
+        minimumLineSpacing = [self.delegate minimumLineSpacingForSegmentedControl:self];
+    }
+    
     CGFloat segmentWidth = [self.delegate segmentedControl:self widthForItemAtIndex:index];
     CGSize flagSize = [self.delegate segmentedControl:self sizeForFlagAtIndex:index];
     
     CGFloat top = 0.f;
-    CGFloat left = 0.f;
-    
+    CGFloat left = minimumLineSpacing * index;
+
     for (NSInteger i = 0; i < index; i ++) {
         CGFloat width = [self.delegate segmentedControl:self widthForItemAtIndex:index];
         left += width;
