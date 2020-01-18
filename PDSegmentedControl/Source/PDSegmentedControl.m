@@ -35,7 +35,6 @@
     } _delegateHas;
 }
 
-@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, assign) NSUInteger selectedIndex;
 @property (nonatomic, strong, nullable) UIView *flag;
@@ -320,19 +319,12 @@
 }
 
 #pragma mark - Getter Methods
-- (UICollectionViewFlowLayout *)layout {
-    if (!_layout) {
-        _layout = [[UICollectionViewFlowLayout alloc] init];
-        _layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _layout.minimumInteritemSpacing = 0;
-        _layout.minimumLineSpacing = 0;
-    }
-    return _layout;
-}
-
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.layout];
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
