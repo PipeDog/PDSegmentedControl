@@ -8,11 +8,32 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class PDSegmentedControl;
+
+@protocol PDSegmentedControlDataSource, PDSegmentedControlDelegate;
 
 typedef UICollectionViewCell PDSegmentedControlCell;
 
-NS_ASSUME_NONNULL_BEGIN
+@interface PDSegmentedControl : UIView
+
+@property (nonatomic, weak) id<PDSegmentedControlDataSource> dataSource;
+@property (nonatomic, weak) id<PDSegmentedControlDelegate> delegate;
+
+@property (nonatomic, assign, readonly) NSUInteger selectedIndex;
+@property (nonatomic, strong, readonly) UIScrollView *scrollView;
+
+@property (nonatomic, assign) BOOL alwaysBounceHorizontal; // Default is NO.
+@property (nonatomic, assign) BOOL bounces; // Default is YES.
+
+- (void)reloadData;
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
+
+- (__kindof PDSegmentedControlCell *)dequeueReusableCellOfClass:(Class)aClass forIndex:(NSInteger)index;
+
+@end
 
 @protocol PDSegmentedControlDataSource <NSObject>
 
@@ -36,25 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGSize)segmentedControl:(PDSegmentedControl *)segmentedControl sizeForFlagAtIndex:(NSInteger)index;
 - (CGPoint)segmentedControl:(PDSegmentedControl *)segmentedControl offsetForFlagAtIndex:(NSInteger)index;
 - (CGFloat)minimumInteritemSpacingForSegmentedControl:(PDSegmentedControl *)segmentedControl;
-
-@end
-
-@interface PDSegmentedControl : UIView
-
-@property (nonatomic, weak) id<PDSegmentedControlDataSource> dataSource;
-@property (nonatomic, weak) id<PDSegmentedControlDelegate> delegate;
-
-@property (nonatomic, assign, readonly) NSUInteger selectedIndex;
-@property (nonatomic, strong, readonly) UIScrollView *scrollView;
-
-@property (nonatomic, assign) BOOL alwaysBounceHorizontal; // Default is NO.
-@property (nonatomic, assign) BOOL bounces; // Default is YES.
-
-- (void)reloadData;
-
-- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
-
-- (__kindof PDSegmentedControlCell *)dequeueReusableCellOfClass:(Class)aClass forIndex:(NSInteger)index;
 
 @end
 
