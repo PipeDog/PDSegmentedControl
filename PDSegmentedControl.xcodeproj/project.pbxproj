@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19BBB1536430702D4A7AF283 /* libPods-PDSegmentedControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63123A9395F2B9C98380D0FE /* libPods-PDSegmentedControl.a */; };
+		4D86215AFE8AE16D5A0A907A /* libPods-PDSegmentedControlTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2F06307467C6C4044899B1 /* libPods-PDSegmentedControlTests.a */; };
+		D7B55E214E6D6C08CDDD3D7C /* libPods-PDSegmentedControl-PDSegmentedControlUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 521EC68BFF6CCFDB5E9A16F5 /* libPods-PDSegmentedControl-PDSegmentedControlUITests.a */; };
+		DD1566D723D2ABF900D7F63C /* PDDefaultSegmentedControlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1566D623D2ABF900D7F63C /* PDDefaultSegmentedControlCell.m */; };
 		EC77022B206A718700B1A3B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EC77022A206A718700B1A3B4 /* AppDelegate.m */; };
 		EC77022E206A718700B1A3B4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC77022D206A718700B1A3B4 /* ViewController.m */; };
 		EC770231206A718700B1A3B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC77022F206A718700B1A3B4 /* Main.storyboard */; };
@@ -36,6 +40,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		034861E0DA31184BE5A00B14 /* Pods-PDSegmentedControl-PDSegmentedControlUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDSegmentedControl-PDSegmentedControlUITests.release.xcconfig"; path = "Target Support Files/Pods-PDSegmentedControl-PDSegmentedControlUITests/Pods-PDSegmentedControl-PDSegmentedControlUITests.release.xcconfig"; sourceTree = "<group>"; };
+		311924C1F92778979DDC7182 /* Pods-PDSegmentedControl-PDSegmentedControlUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDSegmentedControl-PDSegmentedControlUITests.debug.xcconfig"; path = "Target Support Files/Pods-PDSegmentedControl-PDSegmentedControlUITests/Pods-PDSegmentedControl-PDSegmentedControlUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		521EC68BFF6CCFDB5E9A16F5 /* libPods-PDSegmentedControl-PDSegmentedControlUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PDSegmentedControl-PDSegmentedControlUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		63123A9395F2B9C98380D0FE /* libPods-PDSegmentedControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PDSegmentedControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B2F06307467C6C4044899B1 /* libPods-PDSegmentedControlTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PDSegmentedControlTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		736AD4B44FA57327C45589F4 /* Pods-PDSegmentedControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDSegmentedControl.release.xcconfig"; path = "Target Support Files/Pods-PDSegmentedControl/Pods-PDSegmentedControl.release.xcconfig"; sourceTree = "<group>"; };
+		886F5F9A6C275448EC0E91EB /* Pods-PDSegmentedControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDSegmentedControl.debug.xcconfig"; path = "Target Support Files/Pods-PDSegmentedControl/Pods-PDSegmentedControl.debug.xcconfig"; sourceTree = "<group>"; };
+		C5B8C5FF72BF8592FDB38F6B /* Pods-PDSegmentedControlTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDSegmentedControlTests.debug.xcconfig"; path = "Target Support Files/Pods-PDSegmentedControlTests/Pods-PDSegmentedControlTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DD1566D523D2ABF900D7F63C /* PDDefaultSegmentedControlCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDDefaultSegmentedControlCell.h; sourceTree = "<group>"; };
+		DD1566D623D2ABF900D7F63C /* PDDefaultSegmentedControlCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDDefaultSegmentedControlCell.m; sourceTree = "<group>"; };
 		EC770226206A718700B1A3B4 /* PDSegmentedControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PDSegmentedControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC770229206A718700B1A3B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EC77022A206A718700B1A3B4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,6 +68,7 @@
 		EC77024F206A718700B1A3B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC77025C206A724300B1A3B4 /* PDSegmentedControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PDSegmentedControl.h; sourceTree = "<group>"; };
 		EC77025D206A724300B1A3B4 /* PDSegmentedControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PDSegmentedControl.m; sourceTree = "<group>"; };
+		F616ABFE8397657321EFF593 /* Pods-PDSegmentedControlTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PDSegmentedControlTests.release.xcconfig"; path = "Target Support Files/Pods-PDSegmentedControlTests/Pods-PDSegmentedControlTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19BBB1536430702D4A7AF283 /* libPods-PDSegmentedControl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D86215AFE8AE16D5A0A907A /* libPods-PDSegmentedControlTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,12 +92,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7B55E214E6D6C08CDDD3D7C /* libPods-PDSegmentedControl-PDSegmentedControlUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3EAEDB96152AEDE6550842E1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				886F5F9A6C275448EC0E91EB /* Pods-PDSegmentedControl.debug.xcconfig */,
+				736AD4B44FA57327C45589F4 /* Pods-PDSegmentedControl.release.xcconfig */,
+				311924C1F92778979DDC7182 /* Pods-PDSegmentedControl-PDSegmentedControlUITests.debug.xcconfig */,
+				034861E0DA31184BE5A00B14 /* Pods-PDSegmentedControl-PDSegmentedControlUITests.release.xcconfig */,
+				C5B8C5FF72BF8592FDB38F6B /* Pods-PDSegmentedControlTests.debug.xcconfig */,
+				F616ABFE8397657321EFF593 /* Pods-PDSegmentedControlTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		EC77021D206A718700B1A3B4 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +119,8 @@
 				EC770241206A718700B1A3B4 /* PDSegmentedControlTests */,
 				EC77024C206A718700B1A3B4 /* PDSegmentedControlUITests */,
 				EC770227206A718700B1A3B4 /* Products */,
+				3EAEDB96152AEDE6550842E1 /* Pods */,
+				F1FBF783AB4DA83CBACDE47A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +140,8 @@
 				EC77025B206A720600B1A3B4 /* Source */,
 				EC770229206A718700B1A3B4 /* AppDelegate.h */,
 				EC77022A206A718700B1A3B4 /* AppDelegate.m */,
+				DD1566D523D2ABF900D7F63C /* PDDefaultSegmentedControlCell.h */,
+				DD1566D623D2ABF900D7F63C /* PDDefaultSegmentedControlCell.m */,
 				EC77022C206A718700B1A3B4 /* ViewController.h */,
 				EC77022D206A718700B1A3B4 /* ViewController.m */,
 				EC77022F206A718700B1A3B4 /* Main.storyboard */,
@@ -145,6 +180,16 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		F1FBF783AB4DA83CBACDE47A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63123A9395F2B9C98380D0FE /* libPods-PDSegmentedControl.a */,
+				521EC68BFF6CCFDB5E9A16F5 /* libPods-PDSegmentedControl-PDSegmentedControlUITests.a */,
+				6B2F06307467C6C4044899B1 /* libPods-PDSegmentedControlTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -152,6 +197,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC770252206A718700B1A3B4 /* Build configuration list for PBXNativeTarget "PDSegmentedControl" */;
 			buildPhases = (
+				CE15188FC690BB347C4F6DD1 /* [CP] Check Pods Manifest.lock */,
 				EC770222206A718700B1A3B4 /* Sources */,
 				EC770223206A718700B1A3B4 /* Frameworks */,
 				EC770224206A718700B1A3B4 /* Resources */,
@@ -169,6 +215,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC770255206A718700B1A3B4 /* Build configuration list for PBXNativeTarget "PDSegmentedControlTests" */;
 			buildPhases = (
+				925B584990CED63176009F07 /* [CP] Check Pods Manifest.lock */,
 				EC77023A206A718700B1A3B4 /* Sources */,
 				EC77023B206A718700B1A3B4 /* Frameworks */,
 				EC77023C206A718700B1A3B4 /* Resources */,
@@ -187,6 +234,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC770258206A718700B1A3B4 /* Build configuration list for PBXNativeTarget "PDSegmentedControlUITests" */;
 			buildPhases = (
+				4354416E38BBA84A69902A33 /* [CP] Check Pods Manifest.lock */,
 				EC770245206A718700B1A3B4 /* Sources */,
 				EC770246206A718700B1A3B4 /* Frameworks */,
 				EC770247206A718700B1A3B4 /* Resources */,
@@ -273,11 +321,81 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4354416E38BBA84A69902A33 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PDSegmentedControl-PDSegmentedControlUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		925B584990CED63176009F07 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PDSegmentedControlTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE15188FC690BB347C4F6DD1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PDSegmentedControl-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EC770222206A718700B1A3B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1566D723D2ABF900D7F63C /* PDDefaultSegmentedControlCell.m in Sources */,
 				EC77025E206A724300B1A3B4 /* PDSegmentedControl.m in Sources */,
 				EC77022E206A718700B1A3B4 /* ViewController.m in Sources */,
 				EC770239206A718700B1A3B4 /* main.m in Sources */,
@@ -442,6 +560,7 @@
 		};
 		EC770253206A718700B1A3B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 886F5F9A6C275448EC0E91EB /* Pods-PDSegmentedControl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -455,6 +574,7 @@
 		};
 		EC770254206A718700B1A3B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 736AD4B44FA57327C45589F4 /* Pods-PDSegmentedControl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -468,6 +588,7 @@
 		};
 		EC770256206A718700B1A3B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5B8C5FF72BF8592FDB38F6B /* Pods-PDSegmentedControlTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -482,6 +603,7 @@
 		};
 		EC770257206A718700B1A3B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F616ABFE8397657321EFF593 /* Pods-PDSegmentedControlTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -496,6 +618,7 @@
 		};
 		EC770259206A718700B1A3B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 311924C1F92778979DDC7182 /* Pods-PDSegmentedControl-PDSegmentedControlUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PDSegmentedControlUITests/Info.plist;
@@ -509,6 +632,7 @@
 		};
 		EC77025A206A718700B1A3B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 034861E0DA31184BE5A00B14 /* Pods-PDSegmentedControl-PDSegmentedControlUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = PDSegmentedControlUITests/Info.plist;

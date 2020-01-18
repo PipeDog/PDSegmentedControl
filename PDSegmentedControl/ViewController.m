@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PDSegmentedControl.h"
+#import "PDDefaultSegmentedControlCell.h"
 
 @interface ViewController () <PDSegmentedControlDelegate, PDSegmentedControlDataSource>
 
@@ -30,22 +31,23 @@
     return self.items.count;
 }
 
-- (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForItemAtIndex:(NSInteger)index {
-    PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentOfClass:[PDSegmentedControlSegment class] forIndex:index];
-    segment.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f * (index + 1)];
-    segment.textLabel.font = [UIFont boldSystemFontOfSize:14];
-    segment.textLabel.textColor = [UIColor darkTextColor];
-    segment.textLabel.text = self.items[index];
-    return segment;
+- (PDSegmentedControlCell *)segmentedControl:(PDSegmentedControl *)segmentedControl cellForItemAtIndex:(NSInteger)index {
+    PDDefaultSegmentedControlCell *cell = [segmentedControl dequeueReusableCellOfClass:[PDDefaultSegmentedControlCell class] forIndex:index];
+    cell.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f * (index + 1)];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+    cell.textLabel.textColor = [UIColor darkTextColor];
+    cell.textLabel.text = self.items[index];
+    return cell;
 }
 
-- (PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForSelectedItemAtIndex:(NSInteger)index {
-    PDSegmentedControlSegment *segment = [segmentedControl dequeueReusableSegmentOfClass:[PDSegmentedControlSegment class] forIndex:index];
-    segment.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f * (index + 1)];
-    segment.textLabel.font = [UIFont boldSystemFontOfSize:20];
-    segment.textLabel.textColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
-    segment.textLabel.text = self.items[index];
-    return segment;
+- (PDSegmentedControlCell *)segmentedControl:(PDSegmentedControl *)segmentedControl cellForSelectedItemAtIndex:(NSInteger)index {
+    PDDefaultSegmentedControlCell *cell = [segmentedControl dequeueReusableCellOfClass:[PDDefaultSegmentedControlCell class] forIndex:index];
+    cell.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.1f * (index + 1)];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+    cell.textLabel.textColor = [[UIColor redColor] colorWithAlphaComponent:0.5f];
+    cell.textLabel.text = self.items[index];
+    return cell;
+
 }
 
 #pragma mark - PDSegmentedControlDelegate Methods

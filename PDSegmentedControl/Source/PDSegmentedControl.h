@@ -9,17 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @class PDSegmentedControl;
-@class PDSegmentedControlSegment;
+
+typedef UICollectionViewCell PDSegmentedControlCell;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol PDSegmentedControlDataSource <NSObject>
 
 - (NSInteger)numberOfItemsInSegmentedControl:(PDSegmentedControl *)segmentedControl;
-- (__kindof PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForItemAtIndex:(NSInteger)index;
+- (__kindof PDSegmentedControlCell *)segmentedControl:(PDSegmentedControl *)segmentedControl cellForItemAtIndex:(NSInteger)index;
 
 @optional
-- (__kindof PDSegmentedControlSegment *)segmentedControl:(PDSegmentedControl *)segmentedControl segmentForSelectedItemAtIndex:(NSInteger)index;
+- (__kindof PDSegmentedControlCell *)segmentedControl:(PDSegmentedControl *)segmentedControl cellForSelectedItemAtIndex:(NSInteger)index;
 
 @end
 
@@ -53,13 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated;
 
-- (__kindof PDSegmentedControlSegment *)dequeueReusableSegmentOfClass:(Class)aClass forIndex:(NSInteger)index;
-
-@end
-
-@interface PDSegmentedControlSegment : UICollectionViewCell
-
-@property (nonatomic, strong) UILabel *textLabel;
+- (__kindof PDSegmentedControlCell *)dequeueReusableCellOfClass:(Class)aClass forIndex:(NSInteger)index;
 
 @end
 

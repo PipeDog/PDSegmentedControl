@@ -8,17 +8,11 @@
 
 #import "PDSegmentedControl.h"
 
-@interface PDSegmentedControlSegment ()
-
-@property (nonatomic, assign) NSInteger index;
-
-@end
-
 @interface PDSegmentedControl () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
     struct {
         unsigned numberOfItemsInSegmentedControl : 1;
-        unsigned segmentForItemAtIndex : 1;
-        unsigned selectedSegmentForItemAtIndex : 1;
+        unsigned cellForItemAtIndex : 1;
+        unsigned selectedCellForItemAtIndex : 1;
     } _dataSourceHas;
     
     struct {
@@ -58,10 +52,19 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        [self addSubview:self.collectionView];
+        [self commitInit];
+        [self createViewHierarchy];
     }
     return self;
+}
+
+- (void)commitInit {
+    self.backgroundColor = [UIColor whiteColor];
+    _selectedIndex = 0;
+}
+
+- (void)createViewHierarchy {
+    [self addSubview:self.collectionView];
 }
 
 - (void)reloadFlag {
@@ -146,19 +149,19 @@
     [self flagScrollToIndex:selectedIndex animated:animated];
 }
 
-- (PDSegmentedControlSegment *)dequeueReusableSegmentOfClass:(Class)aClass forIndex:(NSInteger)index {
+- (PDSegmentedControlCell *)dequeueReusableCellOfClass:(Class)aClass forIndex:(NSInteger)index {
     if (!aClass || index < 0) {
         NSAssert(NO, @"Invalid parameter");
         return nil;
     }
     
-    NSString *segmentId = NSStringFromClass(aClass);
+    NSString *cellId = NSStringFromClass(aClass);
     
     if (![self.registeredSegmentClasses containsObject:aClass]) {
         [self.registeredSegmentClasses addObject:aClass];
-        [self.collectionView registerClass:aClass forCellWithReuseIdentifier:segmentId];
+        [self.collectionView registerClass:aClass forCellWithReuseIdentifier:cellId];
     }
-    return [self.collectionView dequeueReusableCellWithReuseIdentifier:segmentId forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    return [self.collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
 #pragma mark - UICollectionView Delegate && DataSource Methods
@@ -170,18 +173,15 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BOOL currentIndexIsSelected = (indexPath.row == self.selectedIndex);
-    BOOL hasSelectedSegment = _dataSourceHas.selectedSegmentForItemAtIndex;
+    BOOL hasSelectedSegment = _dataSourceHas.selectedCellForItemAtIndex;
 
     if (currentIndexIsSelected && hasSelectedSegment) {
-        PDSegmentedControlSegment *segment = [self.dataSource segmentedControl:self segmentForSelectedItemAtIndex:indexPath.row];
-        segment.index = indexPath.row;
-        return segment;
+        PDSegmentedControlCell *cell = [self.dataSource segmentedControl:self cellForSelectedItemAtIndex:indexPath.row];
+        return cell;
     } else {
-        NSAssert(_dataSourceHas.segmentForItemAtIndex, @"Protocol method segmentedControl:segmentForItemAtIndex: must be implemented");
-        
-        PDSegmentedControlSegment *segment = [self.dataSource segmentedControl:self segmentForItemAtIndex:indexPath.row];
-        segment.index = indexPath.row;
-        return segment;
+        NSAssert(_dataSourceHas.cellForItemAtIndex, @"Protocol method segmentedControl:cellForItemAtIndex: must be implemented");
+        PDSegmentedControlCell *cell = [self.dataSource segmentedControl:self cellForItemAtIndex:indexPath.row];
+        return cell;
     }
 }
 
@@ -278,8 +278,8 @@
     _dataSource = dataSource;
 
     _dataSourceHas.numberOfItemsInSegmentedControl = [_dataSource respondsToSelector:@selector(numberOfItemsInSegmentedControl:)];
-    _dataSourceHas.segmentForItemAtIndex = [_dataSource respondsToSelector:@selector(segmentedControl:segmentForItemAtIndex:)];
-    _dataSourceHas.selectedSegmentForItemAtIndex = [_dataSource respondsToSelector:@selector(segmentedControl:segmentForSelectedItemAtIndex:)];
+    _dataSourceHas.cellForItemAtIndex = [_dataSource respondsToSelector:@selector(segmentedControl:cellForItemAtIndex:)];
+    _dataSourceHas.selectedCellForItemAtIndex = [_dataSource respondsToSelector:@selector(segmentedControl:cellForSelectedItemAtIndex:)];
 }
 
 - (void)setDelegate:(id<PDSegmentedControlDelegate>)delegate {
@@ -354,21 +354,11 @@
     return _registeredSegmentClasses;
 }
 
-@end
-
-@implementation PDSegmentedControlSegment
-
-- (UILabel *)textLabel {
-    if (!_textLabel) {
-        _textLabel = [[UILabel alloc] init];
-        _textLabel.frame = self.bounds;
-        _textLabel.numberOfLines = 1;
-        _textLabel.font = [UIFont systemFontOfSize:12.f];
-        _textLabel.textColor = [UIColor darkTextColor];
-        _textLabel.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview:_textLabel];
+- (NSUInteger)selectedIndex {
+    if (![self.collectionView numberOfItemsInSection:0]) {
+        return NSNotFound;
     }
-    return _textLabel;
+    return _selectedIndex;
 }
 
 @end
